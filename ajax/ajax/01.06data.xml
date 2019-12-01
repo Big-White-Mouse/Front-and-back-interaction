@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?><!-- 固定格式 -->
+<!-- "<>"的内容为 元数据：描述数据的数据 -->
+<!-- xml格式数据的弊端
+    1. 元数据占用的数据量较大不利于数据传输
+    2. 解析不方便 -->
+<booklist>
+    <book>
+        <name>三国演义</name>
+        <author>罗贯中</author>
+        <desc>一个杀伐纷争的年代</desc>
+    </book>
+    <book>
+        <name>水浒传</name>
+        <author>施耐庵</author>
+        <desc>108条好汉的故事</desc>
+    </book>
+</booklist>

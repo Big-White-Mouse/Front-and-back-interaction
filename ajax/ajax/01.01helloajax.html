@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form>
+        用户名:<input type="text" name="username" id="username"><span id="info"></span><br>
+        密码:<input type="password" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+    </form>
+
+    <script>
+    	let btn = document.getElementById('btn');
+    	btn.onclick = function(){
+    		//使用ajax发送请求
+    		//0.获取用户输入的值
+    		let username = document.getElementById('username').value;
+    		let password = document.getElementById('password').value;
+    		//1.创建XMLHttpRequest对象
+    		let xhr = new XMLHttpRequest();
+    		//2.准备发送
+    		xhr.open('get','01.01check.php?username='+username+'&password='+password,true);//三个参数 第一个参数发送方式  最后一个true异步发送请求
+    		//3.发送
+    		xhr.send(null);
+    		//4.指定回调函数
+    		xhr.onreadystatechange = function(){
+    			if(xhr.readyState == 4){
+    				if(xhr.status == 200){
+    					let data = xhr.responseText;
+    					let info = document.getElementById('info');
+    					if(data == '1'){
+    						info.innerHTML = '登陆成功';
+    					} else if (data == '2'){
+    						info.innerHTML = '登陆失败';
+    					}
+    				}
+    			}
+    		}
+    	}
+    </script>
+</body>
+</html>

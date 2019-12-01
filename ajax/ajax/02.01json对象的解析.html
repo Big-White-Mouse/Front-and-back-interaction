@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    // 对象
+    /*
+    json数据和普通的js对象的区别：
+    1、json数据没有变量
+    2、json形式的数据结尾没有分号
+    3、json数据中的键必须用双引号包住
+    */
+
+    window.onload = function(){
+        var btn = document.getElementById('btn');
+        btn.onclick = function(){
+            var uname = document.getElementById('username').value;
+            var pw = document.getElementById('password').value;
+
+            // 1、创建XMLHttpRequest对象
+            var xhr = null;
+            if(window.XMLHttpRequest){
+                xhr = new XMLHttpRequest();//标准
+            }else{
+                xhr = new ActiveXObject("Microsoft");//IE6
+            }
+            // 2、准备发送
+            var param = 'username='+uname+'&password='+pw;
+            xhr.open('post','02.01data.json');
+            // 3、执行发送动作
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.send(param);
+            // 4、指定回调函数
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        let data = xhr.responseText;
+                        let d = JSON.parse(data);//将json格式的数据转换成对象
+                        console.log(d);
+                    }
+                }
+            } 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <form>
+        用户名：
+        <input type="text" name="username" id="username"><span id="info"></span>
+        <br> 密码：
+        <input type="text" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+    </form>
+    <div id="showInfo"></div>
+</body>
+
+</html>

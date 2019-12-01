@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form>
+        用户名:<input type="text" name="username" id="username"><span id="info"></span><br>
+        密码:<input type="password" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+    </form>
+
+    <script>
+    	let btn = document.getElementById('btn');
+    	btn.onclick = function(){
+    		let username = document.getElementById('username').value;
+    		let password = document.getElementById('password').value;
+
+            //1.创建对象
+    		let xhr = null;
+    		if(window.XMLHttpRequest){
+    			xhr = new XMLHttpRequest();//标准
+    		} else {
+    			xhr = new ActiveXObject("Microsoft.XMLHTTP");}//IE6
+
+            //2.准备发送
+            //第一个参数：请求方式  get获取数据  post提交数据
+            //第二个参数：URL地址（从那个文件请求信息）
+            //第三个参数：同步或异步标志位  默认true
+            //注意 如果是get请求，那么请求参数必须要在url中传递  多个参数要在前面加&例如下面的password前面
+            xhr.open('get','01.03get.php?username='+username+'&password='+password,true);
+
+            //3.执行发送动作
+            xhr.send(null);//如果是get请求 有些浏览器需要参数null有些不需要 为了兼容性都加上
+
+            //4.指定回调参数
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        alert(xhr.responseText);
+                    }
+                }
+            }
+    	}
+    </script>
+</body>
+</html>

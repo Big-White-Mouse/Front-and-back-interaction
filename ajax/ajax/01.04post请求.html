@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form>
+        用户名:<input type="text" name="username" id="username"><span id="info"></span><br>
+        密码:<input type="password" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+    </form>
+
+    <script>
+    	let btn = document.getElementById('btn');
+    	btn.onclick = function(){
+    		let username = document.getElementById('username').value;
+    		let password = document.getElementById('password').value;
+
+            //1.创建对象
+    		let xhr = null;
+    		if(window.XMLHttpRequest){
+    			xhr = new XMLHttpRequest();//标准
+    		} else {
+    			xhr = new ActiveXObject("Microsoft.XMLHTTP");}//IE6
+
+            xhr.open('post','01.04post.php',true);
+            let param = 'username='+username+'&password='+password;
+            //POST要设置请求头 （固定的）
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            //3.执行发送动作
+            xhr.send(param);//post请求的参数在这里传递
+
+            //4.指定回调参数
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        alert(xhr.responseText);
+                    }
+                }
+            }
+    	}
+    </script>
+</body>
+</html>

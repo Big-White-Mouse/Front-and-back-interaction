@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form>
+        用户名:<input type="text" name="username" id="username"><span id="info"></span><br>
+        密码:<input type="password" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+    </form>
+
+    <script>
+    	let btn = document.getElementById('btn');
+    	btn.onclick = function(){
+    		let username = document.getElementById('username').value;
+    		let password = document.getElementById('password').value;
+    		let xhr = null;
+    		if(window.XMLHttpRequest){
+    			xhr = new XMLHttpRequest();
+    		} else {
+    			xhr = new ActiveXObject("Microsoft.XMLHTTP");}
+
+            //console.log(xhr.readyState);//=0  表示xhr对象初始化完成
+            xhr.open('post','01.04post.php',true);
+            let param = 'username='+username+'&password='+password;
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.send(param);
+            //console.log(xhr.readyState);//=1 表示已经发送了请求  
+
+            //4.指定回调参数   此处为声明函数   浏览器自行调用   当readyState的值发生变化(不包括从0到1的变化)的时候浏览器调用这个函数
+            xhr.onreadystatechange = function(){
+                //console.log(xhr.readyState);
+                //=2 表示浏览器已经收到了服务器响应的数据 还没有解析
+                //=3 表示浏览器正在解析数据
+                //=4 表示数据解析完成 可以使用
+                if(xhr.readyState == 4){
+                    //status=200表示数据解析后是正常的
+                    //=404没有找到请求的资源
+                    //=500服务器端错误
+                    if(xhr.status == 200){
+                        alert(xhr.responseText);
+                    }
+                }
+            }
+    	}
+    </script>
+</body>
+</html>

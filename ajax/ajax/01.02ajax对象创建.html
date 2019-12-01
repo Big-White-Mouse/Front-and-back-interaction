@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form>
+        用户名:<input type="text" name="username" id="username"><span id="info"></span><br>
+        密码:<input type="password" name="password" id="password">
+        <input type="button" value="登录" id="btn">
+    </form>
+
+    <script>
+    	let btn = document.getElementById('btn');
+    	btn.onclick = function(){
+    		let username = document.getElementById('username');
+    		let password = document.getElementById('password');
+
+    		//1.创建XHR(XMLHttpRequest)对象
+    		// let xhr = new XMLHttpRequest();
+    		//let xhr1 = new ActiveXObject("Microsoft.XMLHTTP");//早期IE6
+
+    		//兼容处理
+    		let xhr = null;
+    		if(window.XMLHttpRequest){
+    			xhr = new XMLHttpRequest();//标准
+    		} else {
+    			xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE6
+    		}
+
+    	}
+    </script>
+</body>
+</html>
