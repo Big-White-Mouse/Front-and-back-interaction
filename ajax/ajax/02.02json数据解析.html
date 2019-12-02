@@ -1,1 +1,57 @@
-02.02json数据解析.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+<form>
+    用户名：
+    <input type="text" name="username" id="username"><span id="info"></span>
+    <br> 密码：
+    <input type="text" name="password" id="password">
+    <input type="button" value="登录" id="btn">
+</form>
+<div id="showInfo"></div>
+<script type="text/javascript">
+    let btn = document.getElementById('btn');
+
+    let str = '{"name":"zhangsan","age":"12"}';
+    let obj = JSON.parse(str);//JSON.parse作用是把json形式的字符串转成对象
+    console.log(obj);
+    let str1 = JSON.stringify(obj);//把对象转换成json数据格式(字符串)
+    console.log(str1); 
+    let js1 = eval("("+ str +")");//eval 把字符串解析成js格式并执行  有格式要求  有安全隐患
+    console.log(js1);
+    console.log(js1.name);
+    console.log(js1.age);
+
+    // btn.onclick = function(){
+    //     let uname = document.getElementById('username').value;
+    //     let pw = document.getElementById('password').value;
+    //     let xhr = null;
+    //     if(window.XMLHttpRequest){
+    //         xhr = new XMLHttpRequest();//标准
+    //     }else{
+    //         xhr = new ActiveXObject("Microsoft");//IE6
+    //     }
+    //     let param = 'username='+uname+'&password='+pw;
+    //     xhr.open('post','02.01data.json');
+    //     xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //     xhr.send(param);
+    //     xhr.onreadystatechange = function(){
+    //         if(xhr.readyState == 4){
+    //             if(xhr.status == 200){
+    //                 let data = xhr.responseText;
+    //                 let d = JSON.parse(data);//将json格式的数据转换成对象
+    //                 console.log(d);
+    //             }
+    //         }
+    //     } 
+    // }
+</script>
+</body>
+
+</html>

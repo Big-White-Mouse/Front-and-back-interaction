@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{
+			width: 100px;
+			height: 100px;
+			background-color: pink;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<input type="button" value="点击" id="btn">
+<script>
+	//同步 彼此等待 阻塞  网络不好是会有长时间的白屏时间
+	//异步 各做各的 非阻塞
+	let btn = document.getElementById('btn');
+	btn.onclick = function(){
+		let xhr = null;
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		} else {
+			xhr = new ActiveXObject('Microsoft.XMLHTP');
+		}
+		xhr.open('get','03.01data.php',true);
+		xhr.send(null);
+		console.log(1);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+					let data = xhr.responseText;
+					let obj = JSON.parse(data);
+					let tag = '<div><span>'+obj.info+'</span><br><span>'+obj.message+'</span></div>';
+					let box = document.getElementById('box');
+					box.innerHTML = tag;
+					console.log(2);
+				}
+			}
+		}
+		console.log(3);
+	}
+	//控制台输出顺序是132  也就是说回调函数最后执行
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script>
+	console.log(1);
+	setTimeout(function(){
+		console.log(2);
+	},1);
+	let sum=0;
+	for(let i=0;i<100000;i++){//用来消耗时间，观察最后输出2的原因是不是3输出的太快；
+		sum += i;
+	}
+	console.log(sum);
+	console.log(3);
+	//js事件处理机制：单线程 + 事件队列
+	//单线程： 同一个时间只能处理一件事情
+	//事件队列： 
+	//当js扫描到回调函数等事件时 会将函数放到事件队列中去
+	//每当主线程处理完后，浏览器执行‘事件循环’判断事件队列中是否有任务
+	//如果有任务，当满足：
+	//1.主线程空闲
+	//2.函数达到触发条件 
+	//	2.1定时函数(达到延时时间)
+	//	2.2事件函数(特定事件被触发)
+	//	2.3ajax回调函数(服务器端有数据响应)
+	//浏览器就会把任务放到主线程中去执行
+</script>
+</body>
+</html>
