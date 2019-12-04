@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#container{
+			width: 360px;
+			min-height: 100px;
+			background-color: rgba(0,0,0,0.5);
+			position: absolute;
+			left: 50%;
+			top: 10px;
+			margin-left: -180px;
+		}
+	</style>
+</head>
+<body>
+<div id="container">
+	<div>
+		图书编码：<input type="text" name="code" id="code">
+		<input type="button" value="查询" id="btn">
+	</div>
+	<div id="info"></div>
+</div>
+<script src="jquery-3.4.1.js"></script>
+<script>
+	$("#btn").on("click",function(){
+		let code = $("#code").val();
+		$.ajax({//jquery中的ajax通过对象传递参数  所以不需要注意顺序和数据的完整性
+			type: "get",
+			url: "03.04find.php",
+			data: {code:code},//{接收的参数:js变量}//而且兼容get和post请求
+			dataType: "json",
+			success:function(data){
+				let obj = $("#info");
+				if(data.flag == 0){
+					obj.text('没有这本书');
+				} else {
+					let tag = '<ul><li>书名：'+data.bookname+'</li><li>作者：'+data.author+'</li><li>描述：'+data.desc+'</li></ul>';
+					obj.html(tag);
+				} ·
+			}
+		});
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+<input type="button" value="创建链接" id="btn">
+
+<!--<script src="http://localtest1/05.01data.php">//静态script标签 通过src属性发送跨域请求</script>-->
+<script>
+    //默认同步加载 在上一个标签加载后这里才能正常输出 如果在标签中加上 async 进行异步加载就会出错
+
+    //存在问题
+    /*
+    * 1.不方便通过程序传递 要在src里添加
+    * 2.必须保证加载顺序
+    * */
+    // console.log(data.username);
+    // console.log(data.password);
+
+    //jsonp本质：动态创建标签
+    //动态创建标签
+    //动态创建标签发送的请求时异步请求  再数据文件中改为函数调用解决
+
+    //所以动态创建标签本质是  服务器响应的内容(fun(实参))为函数调用
+    let script = document.createElement('script');
+    script.src = 'http://localtest1/05.01data.php';
+    let head = document.getElementsByTagName('head')[0];
+
+    let btn = document.getElementById('btn');
+    btn.onclick = function(){
+        head.appendChild(script);
+    };
+
+    //console.log(data);//由于异步请求所以data没有声明
+    function fun(data){
+        console.log(data);//把php文件中修改为函数调用 js先初始化这个fun函数  再由服务器响应出的内容(js代码)调用  最终输出123
+    }
+</script>
+</body>
+</html>
