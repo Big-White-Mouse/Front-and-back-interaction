@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="template-web.js"></script>
+<script type="text/html" id="template">
+    <h1>{{title}}</h1>
+    {{if books}} <!-- 判断data对象里是否存在books属性 -->
+        {{each books as value i}}  <!-- 用value循环获取books的属性 i作为索引 -->
+            <div>{{value}}</div>
+        {{/each}}
+    {{/if}}
+</script>
+<script>
+    let data = {//模拟服务器端数据
+        title : '图书信息',
+        books : ['book1','book2','book3','book4']
+    };
+
+    //template作用就是把模板和数据拼接到一块生成一个静态HTML片段作为该方法的返回值
+    let html = template('template',data);//第一个template是调用API 第二个template(第一个参数)是模板的id 第二的参数是用于渲染的数据
+    let box = document.getElementById('box');
+    box.innerHTML = html;
+</script>
+</body>
+</html>

@@ -14,6 +14,8 @@
 <div id="box"></div>
 <script src="template-web.js"></script>
 <script>
+    //传统动态渲染 由于字符串拼接没有统一的标准所以不方便维护
+    //我们采用模板引擎的方式进行
     function success(data){//模拟回调函数
         let title = data.title;
         let books = data.books;

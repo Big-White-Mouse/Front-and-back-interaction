@@ -1,29 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <script type="text/javascript" src="template-web.js"></script>
 </head>
-
 <body>
+<h1>不转义HTML</h1>
 <div id="content"></div>
 <script id="test" type="text/html">
-    {{if isAdmin}}
-    <h1>{{title}}</h1>
-    <ul>
-        {{each list as value i}}
-        <li>索引 {{i + 1}} ：{{value}}</li>
-        {{/each}}
-    </ul>
-    {{/if}}
+    <p>不转义：{{#value}}</p>
+    <p>默认转义： {{value}}</p>
 </script>
+
 <script>
+    // 这里的数据当中包含特殊字符
     let data = {
-        title: '基本例子',
-        isAdmin: true,
-        list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+        value: '<span style="color:#F00">hello world!</span>'
     };
     let html = template('test', data);
     document.getElementById('content').innerHTML = html;
